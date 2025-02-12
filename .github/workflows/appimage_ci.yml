@@ -10,7 +10,7 @@ jobs:
 
   build-ubuntu-x64:
     name: Build AppImage ${{ matrix.Configuration }} ${{ matrix.Platform }}
-    runs-on: ubuntu-20.04 # ubuntu-22.04 after 2025-04-01
+    runs-on: ubuntu-22.04 # ubuntu-22.04 after 2025-04-01
     strategy:
       fail-fast: false
       matrix:

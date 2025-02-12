@@ -80,9 +80,9 @@ jobs:
         run: |
             cd ${{github.workspace}}
             echo add appimage sources
-            cp -ax Linux/AppImage/Sources/appimage.* Quake
+            cp -axv Linux/AppImage/Sources/appimage.* Quake
             echo apply appimage patch and compile
-            patch --verbose -p1 Linux/AppImage/patches/0001-ironwail-AppImage.patch
+            patch --verbose -p1 < Linux/AppImage/patches/0001-ironwail-AppImage.patch
 
       - name: Build sources
         run: |
@@ -97,10 +97,10 @@ jobs:
         run: |
             cd ${{github.workspace}}
             echo if use cmake # remove echo
-            echo cp -ax build/ironwail Linux/AppImage/AppDir/usr/bin
-            cp -ax Quake/ironwail Linux/AppImage/AppDir/usr/bin
-            cp -ax Quake/ironwail.pak Linux/AppImage/AppDir/usr/bin
-            cp -ax Linux/AppImage/Img/ironwail.jpg Linux/AppImage/AppDir/usr/bin
+            echo cp -axv build/ironwail Linux/AppImage/AppDir/usr/bin
+            cp -axv Quake/ironwail Linux/AppImage/AppDir/usr/bin
+            cp -axv Quake/ironwail.pak Linux/AppImage/AppDir/usr/bin
+            cp -axv Linux/AppImage/Img/ironwail.jpg Linux/AppImage/AppDir/usr/bin
 
       - name: Build AppImage
         run: |

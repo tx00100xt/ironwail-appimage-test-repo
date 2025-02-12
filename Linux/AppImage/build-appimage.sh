@@ -35,7 +35,7 @@ cd ..
 cp -ax Linux/AppImage/Sources/appimage.* Quake
 
 # apply appimage patch and compile
-patch -p1 Linux/AppImage/patches/0001-ironwail-AppImage.patch
+patch -p1 < Linux/AppImage/patches/0001-ironwail-AppImage.patch
 
 # if use cmake
 # mkdir build && cd build

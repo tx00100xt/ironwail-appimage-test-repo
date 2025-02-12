@@ -52,7 +52,3 @@ cp -ax Linux/AppImage/Img/ironwail.jpg Linux/AppImage/AppDir/usr/bin
 
 # create appimage
 SIGN=1 ./linuxdeploy-x86_64.AppImage --executable Linux/AppImage/AppDir/usr/bin/ironwail --desktop-file Linux/AppImage/AppDir/usr/share/applications/io.github.andrei-drexler.ironwail.desktop --icon-file Linux/AppImage/AppDir/usr/share/icons/hicolor/128x128/apps/ironwail.png --appdir Linux/AppImage/AppDir --output appimage
-
-# rename appimage
-mv ironwail-x86_64.AppImage ironwail-0.8.0-x86_64.AppImage
-chmod +x ironwail-0.8.0-x86_64.AppImage

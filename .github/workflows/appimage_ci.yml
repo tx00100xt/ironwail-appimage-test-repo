@@ -53,9 +53,7 @@ jobs:
         run: |
             cd ${{github.workspace}}
             sh Linux/AppImage/build-appimage.sh
-            find . -name ironwail-x86_64.AppImage -exec mv -f {} . \;
-            ls -la
-            mv -f ${{github.workspace}}/*.AppImage ironwail-${{ steps.date.outputs.time }}-0.8.0-x86_64.AppImage
+            mv -f ${{github.workspace}}/Ironwail-x86_64.AppImage ironwail-${{ steps.date.outputs.time }}-0.8.0-x86_64.AppImage
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4

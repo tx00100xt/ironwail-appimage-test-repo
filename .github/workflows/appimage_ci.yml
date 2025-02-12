@@ -82,13 +82,13 @@ jobs:
             echo add appimage sources
             cp -ax Linux/AppImage/Sources/appimage.* Quake
             echo apply appimage patch and compile
-            patch -p1 Linux/AppImage/patches/0001-ironwail-AppImage.patch
+            patch --verbose -p1 Linux/AppImage/patches/0001-ironwail-AppImage.patch
 
       - name: Build sources
         run: |
             cd ${{github.workspace}}
-            echo if use cmake
-            echo mkdir build && cd build
+            echo if use cmake # remove echo
+            echo mkdir build && echo cd build
             echo cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr -DCMAKE_BUILD_TYPE=Release ..
             cd Quake
             make -j4
@@ -96,7 +96,7 @@ jobs:
       - name: Copy compiling binaries 
         run: |
             cd ${{github.workspace}}
-            echo if use cmake
+            echo if use cmake # remove echo
             echo cp -ax build/ironwail Linux/AppImage/AppDir/usr/bin
             cp -ax Quake/ironwail Linux/AppImage/AppDir/usr/bin
             cp -ax Quake/ironwail.pak Linux/AppImage/AppDir/usr/bin

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Comment=Ironwail is an alternative client for id Software's Quake I
+Categories=Game;Shooter;
+Exec=ironwail -basedir ~/.ironwail %u
+Icon=ironwail
+Name=Ironwail
+StartupNotify=true
+Terminal=false
+Type=Application
+Keywords=quake;first;person;shooter;multiplayer;

@@ -1,0 +1,131 @@
+--- a/CMakeLists.txt	2025-02-11 17:06:03.970158197 +0300
++++ b/CMakeLists.txt	2025-02-12 02:51:25.432596138 +0300
+@@ -76,7 +76,7 @@
+ 		endif()
+ 	endif()
+ endif()
+-target_link_libraries(ironwail PRIVATE SDL2::SDL2)
++target_link_libraries(ironwail PRIVATE SDL2::SDL2 -lSDL2_image -lGLEW)
+ 
+ if (CURL_FOUND)
+ 	target_link_libraries(ironwail PRIVATE CURL::libcurl)
+--- a/Quake/in_sdl.c	2025-02-11 17:06:03.996824717 +0300
++++ b/Quake/in_sdl.c	2025-02-12 07:00:59.512609295 +0300
+@@ -25,11 +25,8 @@
+ */
+ 
+ #include "quakedef.h"
+-#if defined(SDL_FRAMEWORK) || defined(NO_SDL_CONFIG)
+ #include <SDL2/SDL.h>
+-#else
+-#include "SDL.h"
+-#endif
++#include <SDL2/include/SDL_gamecontroller.h>
+ 
+ extern cvar_t ui_mouse;
+ extern cvar_t language;
+diff '--color=auto' -aurN a/Quake/Makefile b/Quake/Makefile
+--- a/Quake/Makefile	2025-02-11 17:06:03.983491457 +0300
++++ b/Quake/Makefile	2025-02-12 02:55:02.455929531 +0300
+@@ -5,7 +5,7 @@
+ # "make DO_USERDIRS=1" to enable user directories support
+ 
+ # Enable/Disable user directories support
+-DO_USERDIRS=0
++DO_USERDIRS=1
+ 
+ ### Enable/Disable SDL2
+ USE_SDL2=1
+@@ -55,7 +55,7 @@
+ CPUFLAGS=
+ LDFLAGS?=
+ DFLAGS ?=
+-CFLAGS ?= -Wall -Wno-trigraphs
++CFLAGS ?= -Wall -Wno-trigraphs -fPIC
+ CFLAGS += -D_FILE_OFFSET_BITS=64
+ CFLAGS += $(call check_gcc,-std=gnu11,)
+ CFLAGS += $(call check_gcc,-Werror=format,)
+@@ -178,7 +178,7 @@
+ ifeq ($(HOST_OS),haiku)
+ COMMON_LIBS= -lGL -ldl
+ else
+-COMMON_LIBS= -lGL -ldl -lm
++COMMON_LIBS= -lGL -ldl -lm -lGLEW -lSDL2_image
+ endif
+ 
+ LIBS = $(COMMON_LIBS) $(NET_LIBS) $(CODECLIBS)
+@@ -258,6 +258,7 @@
+ 	wad.o \
+ 	cmd.o \
+ 	common.o \
++	appimage.o \
+ 	steam.o \
+ 	json.o \
+ 	miniz.o \
+diff '--color=auto' -aurN a/Quake/common.c b/Quake/common.c
+--- a/Quake/common.c	2025-02-11 17:06:03.990158087 +0300
++++ b/Quake/common.c	2025-02-12 02:20:27.332595607 +0300
+@@ -29,6 +29,7 @@
+ #include <errno.h>
+ #include "miniz.h"
+ #include "unicode_translit.h"
++#include "appimage.h"
+ 
+ static const char	*largv[MAX_NUM_ARGVS + 1];
+ static char	argvdummy[] = " ";
+@@ -2978,6 +2979,20 @@
+ }
+ 
+ /*
++==================
++COM_AppImageWindow 
++==================
++*/
++static void COM_AppImageWindow(void)
++{
++	appCreate(1280, 720);
++	appRun();
++	shpExit();
++	sprExit();
++	appExit();
++}
++
++/*
+ =================
+ COM_InitBaseDir
+ =================
+@@ -3153,18 +3168,25 @@
+ 		}
+ 	}
+ 
+-	if (steam)
++	if (steam) {
++		COM_AppImageWindow();
+ 		Sys_Error ("Couldn't find Steam Quake");
+-	if (gog)
++	}
++	else if (gog) {
++		COM_AppImageWindow();
+ 		Sys_Error ("Couldn't find GOG Quake");
+-	if (egs)
++	}
++	else if (egs) {
++		COM_AppImageWindow();
+ 		Sys_Error ("Couldn't find Epic Games Store Quake");
+-
+-	Sys_Error (
+-		"Couldn't determine where Quake is installed.\n"
+-		"Please use the -basedir option to specify a path\n"
+-		"(with an " GAMENAME " subdirectory containing pak0.pak)"
+-	);
++	} else {
++		COM_AppImageWindow();
++		Sys_Error (
++			"Couldn't determine where Quake is installed.\n"
++			"Please use the -basedir option to specify a path\n"
++			"(with an " GAMENAME " subdirectory containing pak0.pak)"
++		);
++	}
+ }
+ 
+ /*

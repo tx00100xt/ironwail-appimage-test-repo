@@ -18,10 +18,10 @@
 
   <description>
     <p>Ironwail a fork of the popular GLQuake descendant QuakeSpasm with a focus on high performance 
-	instead of maximum compatibility, with a few extra features sprinkled on top.. By moving work from
-	the CPU to the GPU (culling, lightmap updates) and taking advantage of more modern OpenGL features
-	(instancing, compute shaders, persistent buffer mapping, indirect multi-draw, bindless textures),
-	this fork is capable of handling even the most demanding maps at very high framerates.</p>
+        instead of maximum compatibility, with a few extra features sprinkled on top.. By moving work from
+        the CPU to the GPU (culling, lightmap updates) and taking advantage of more modern OpenGL features
+        (instancing, compute shaders, persistent buffer mapping, indirect multi-draw, bindless textures),
+        this fork is capable of handling even the most demanding maps at very high framerates.</p>
     <p>Features:</p>
       <ul>
         <li>Supports Windows, Linux, other unices.</li>

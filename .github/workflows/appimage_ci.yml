@@ -9,7 +9,7 @@ on:
 jobs:
 
   build-ubuntu-x64:
-    name: Ubuntu ${{ matrix.Configuration }} ${{ matrix.Platform }}
+    name: Build AppImage ${{ matrix.Configuration }} ${{ matrix.Platform }}
     runs-on: ubuntu-20.04
     strategy:
       fail-fast: false
@@ -37,7 +37,7 @@ jobs:
       - name: Install packages
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -qq -y libsdl2-dev libsdl2-image-dev libogg-dev libvorbis-dev libmpg123-dev &&
+          sudo apt-get install -qq -y libogg-dev libvorbis-dev libmpg123-dev &&
           sudo apt-get install -qq -y zlib1g-dev libglew-dev libmpg123-dev libmpg123-0 libcurl4-nss-dev
           
       - name: Get current date

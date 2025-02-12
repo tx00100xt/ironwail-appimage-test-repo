@@ -8,6 +8,7 @@ wget -nv -c https://github.com/linuxdeploy/linuxdeploy/releases/download/continu
 chmod +x linuxdeploy-x86_64.AppImage
 
 # get and build sdl2 2.28 for ubuntu 20.04
+# ubuntu 20.02 have deprecated sdl2
 wget -nv -c https://www.libsdl.org/release/SDL2-2.28.5.tar.gz
 tar xzpf SDL2-2.28.5.tar.gz
 cd SDL2-2.28.5
@@ -19,6 +20,7 @@ cd ..
 cd ..
 
 # get and build sdl2-image 2.8.2 for ubuntu 20.04
+# ubuntu 20.02 have deprecated sdl_image
 wget -nv -c https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.8.2.tar.gz
 tar xzpf SDL2_image-2.8.2.tar.gz
 cd SDL2_image-2.8.2
@@ -40,9 +42,6 @@ patch -p1 Linux/AppImage/patches/0001-ironwail-AppImage.patch
 # cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr -DCMAKE_BUILD_TYPE=Release ..
 cd Quake
 make -j4
-
-# if use cmake
-# cd ..
 cd ..
 
 # if use cmake

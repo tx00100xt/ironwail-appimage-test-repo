@@ -8,7 +8,7 @@ OBJECTS=$(SOURCES:.c=.o)
 EXECUTABLE=Img/AppImage-Runner
 
 all: $(SOURCES) $(EXECUTABLE)
-	
+
 $(EXECUTABLE): $(OBJECTS) 
 	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
 

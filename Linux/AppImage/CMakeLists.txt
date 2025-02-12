@@ -109,7 +109,7 @@ set(PROJECT_SOURCES
         Sources/main.c
         Sources/appimage.c
 )
-add_executable(AppImage-Runner ${PROJECT_SOURCES})		
+add_executable(AppImage-Runner ${PROJECT_SOURCES})
 
 # Link libraries.
 target_link_libraries(AppImage-Runner PRIVATE  -lGL -lSDL2 -lSDL2_image -lGLEW)

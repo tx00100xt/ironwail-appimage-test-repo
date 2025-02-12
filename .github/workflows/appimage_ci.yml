@@ -39,6 +39,9 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -qq -y libogg-dev libvorbis-dev libmpg123-dev &&
           sudo apt-get install -qq -y zlib1g-dev libglew-dev libmpg123-dev libmpg123-0 libcurl4-nss-dev
+          sudo add-apt-repository universe
+          sudo apt install libfuse2
+          echo https://github.com/AppImage/AppImageKit/wiki/FUSE
           
       - name: Get current date
         id: date

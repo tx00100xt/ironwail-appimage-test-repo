@@ -9,21 +9,6 @@
  
  if (CURL_FOUND)
  	target_link_libraries(ironwail PRIVATE CURL::libcurl)
---- a/Quake/in_sdl.c	2025-02-11 17:06:03.996824717 +0300
-+++ b/Quake/in_sdl.c	2025-02-12 07:00:59.512609295 +0300
-@@ -25,11 +25,8 @@
- */
- 
- #include "quakedef.h"
--#if defined(SDL_FRAMEWORK) || defined(NO_SDL_CONFIG)
- #include <SDL2/SDL.h>
--#else
--#include "SDL.h"
--#endif
-+#include <SDL2/include/SDL_gamecontroller.h>
- 
- extern cvar_t ui_mouse;
- extern cvar_t language;
 diff '--color=auto' -aurN a/Quake/Makefile b/Quake/Makefile
 --- a/Quake/Makefile	2025-02-11 17:06:03.983491457 +0300
 +++ b/Quake/Makefile	2025-02-12 02:55:02.455929531 +0300
